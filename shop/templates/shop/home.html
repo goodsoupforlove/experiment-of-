@@ -1,0 +1,30 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}欢迎 - 在线商城{% endblock %}
+
+{% block content %}
+<div class="text-center py-5">
+    <h1>欢迎来到在线商城</h1>
+    <p class="lead">这是一个基于Django的在线购物网站实验项目</p>
+    
+    <div class="mt-4">
+        <a href="/admin" class="btn btn-primary btn-lg">进入管理后台</a>
+        <a href="#" class="btn btn-outline-secondary btn-lg">浏览商品</a>
+    </div>
+    
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <h3>🛍️ 商品浏览</h3>
+            <p>浏览各类商品，添加到购物车</p>
+        </div>
+        <div class="col-md-4">
+            <h3>🛒 购物车</h3>
+            <p>管理购物车，随时修改商品数量</p>
+        </div>
+        <div class="col-md-4">
+            <h3>📦 订单管理</h3>
+            <p>查看订单状态和历史记录</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
