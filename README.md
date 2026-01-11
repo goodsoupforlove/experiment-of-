@@ -1,16 +1,43 @@
-# 在线购物网站 - 课程实验项目
+🌟 极简在线商城系统 (Online Shop Project)
+本项目是一个基于 Django 4.2.7 开发的响应式在线商城系统。系统实现了从顾客浏览购买到管理员销售统计的完整业务闭环。
 
-## 项目简介
-基于Django + Bootstrap + MySQL的在线购物系统
+管理入口: http://8.148.193.17/admin/
 
-## 快速开始
-1. 激活虚拟环境
-2. pip install -r requirements.txt
-3. cp .env.example .env
-4. 配置.env文件中的数据库信息
-5. python manage.py migrate
-6. python manage.py runserver
+用户入口: http://8.148.193.17/
 
-## 访问
-- 网站: http://localhost:8000
-- 后台: http://localhost:8000/admin
+用户测试账号与管理员账号：admin 密码：admin123
+
+🚀 核心功能模块
+1. 顾客端功能 (Customer Features)
+账户系统：支持用户自主注册、登录及安全注销。
+
+产品展示：响应式商品列表页，支持图片展示及单价实时显示。
+
+购买流程：模拟从商品详情查看、模拟下单、到确认发货的完整链路。
+
+订单追踪：用户可进入“我的订单历史”页面，通过颜色标识（黄色-待发货，绿色-已发货）显式查看订单状态。
+
+2. 销售管理端 (Sales Management)
+商品目录管理：管理员可通过 Django Admin 后台进行商品的增加、删除、修改及图片维护。
+
+订单处理中心：集成自定义 Admin Actions，支持批量“确认发货”并触发模拟邮件发送逻辑。
+
+销售统计报表：在后台订单列表页集成 “📊 查看销售统计报表” 快捷入口，实时汇总商品成交数量、累计销售额等核心业务指标。
+
+🛠️ 技术栈与架构
+后端框架: Django 4.2.7 (Python 3.10)
+
+部署环境: Ubuntu Server + Gunicorn
+
+前端技术: HTML5, CSS3 (自定义栅格布局)
+
+目录结构规范: 遵循 Django 应用解耦原则，模板文件按命名空间分类存储（如 shop/templates/shop/）。
+
+📦 部署与运行
+环境启动:
+
+Bash
+
+source venv/bin/activate
+gunicorn --bind 127.0.0.1:8000 core.wsgi:application
+

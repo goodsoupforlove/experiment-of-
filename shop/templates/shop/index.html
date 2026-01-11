@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>极简在线商城 - 实验演示</title>
+    <style>
+        body { font-family: 'Microsoft YaHei', sans-serif; margin: 0; background-color: #f4f7f6; }
+        .navbar { background: #2c3e50; padding: 15px 30px; color: white; display: flex; justify-content: space-between; align-items: center; }
+        .nav-btn { background-color: #3498db; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; font-weight: bold; }
+        .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        .product-card { background: white; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); padding-bottom: 20px; text-align: center; overflow: hidden; }
+        .product-card img { width: 100%; height: 220px; object-fit: cover; }
+        .price { color: #e74c3c; font-size: 1.4em; font-weight: bold; }
+        .buy-btn { background: #27ae60; color: white; padding: 10px 25px; text-decoration: none; border-radius: 5px; display: inline-block; }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <h1 style="margin: 0;">🛒 极简商城系统</h1>
+    <div>
+        {% if user.is_authenticated %}
+            <span>欢迎，<strong>{{ user.username }}</strong></span>
+            <a href="/order-history/" class="nav-btn" style="margin-left:20px;">📦 我的订单历史</a>
+            <a href="/logout/" style="color: #bdc3c7; margin-left:15px; text-decoration: none;">注销</a>
+        {% else %}
+            <a href="/login/" style="color: white; text-decoration: none;">登录</a>
+            <a href="/register/" class="nav-btn" style="margin-left:15px;">立即注册</a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="container">
+    <h2>所有商品</h2>
+    <div class="product-grid">
+        {% for product in products %}
+        <div class="product-card">
+            {% if product.image %}
+                <img src="{{ product.image.url }}">
+            {% else %}
+                <div style="height: 220px; background: #ddd; line-height: 220px;">暂无图片</div>
+            {% endif %}
+            <h3>{{ product.name }}</h3>
+            <p class="price">￥{{ product.price }}</p>
+            <a href="/product/{{ product.id }}/" class="buy-btn">查看详情 / 购买</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>

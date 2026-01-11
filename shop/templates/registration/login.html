@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>用户登录 - 我的商店</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; padding-top: 50px; background: #f4f4f4; }
+        .login-container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 300px; }
+        h2 { text-align: center; color: #333; }
+        form p { margin-bottom: 15px; }
+        input[type="text"], input[type="password"] { width: 100%; padding: 8px; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .errorlist { color: red; font-size: 0.9em; list-style: none; padding: 0; }
+        .nav-links { margin-top: 15px; text-align: center; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>用户登录</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">登录</button>
+        </form>
+        <div class="nav-links">
+            还没有账号？ <a href="{% url 'shop:register' %}">立即注册</a>
+        </div>
+    </div>
+</body>
+</html>

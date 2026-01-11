@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>下单成功</title>
+</head>
+<body style="text-align: center; padding-top: 50px; font-family: Arial, sans-serif;">
+    <div style="border: 1px solid #ddd; display: inline-block; padding: 30px; border-radius: 10px; background-color: #f9f9f9;">
+        <h2 style="color: #5cb85c;">🎉 订单提交成功！</h2>
+        <hr>
+        <p><strong>订单编号:</strong> {{ order.id }}</p>
+        <p><strong>所购商品:</strong> {{ order.product.name }}</p>
+        <p><strong>收货地址:</strong> {{ order.address }}</p>
+        <p><strong>订单状态:</strong> <span style="color: blue;">{{ order.status }}</span></p>
+        <br>
+        <a href="{% url 'shop:index' %}" style="text-decoration: none; color: white; background: #337ab7; padding: 10px 20px; border-radius: 5px;">返回首页继续购物</a>
+    </div>
+</body>
+</html>

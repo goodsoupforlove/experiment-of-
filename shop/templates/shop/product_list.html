@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>我的鞋城 - 产品列表</title>
+    <style>
+        .container { width: 80%; margin: auto; }
+        .product-grid { display: flex; flex-wrap: wrap; gap: 20px; }
+        .card { border: 1px solid #ddd; padding: 15px; width: 200px; text-align: center; border-radius: 10px; box-shadow: 2px 2px 5px #eee; }
+        .card img { width: 100%; height: 150px; object-fit: cover; border-radius: 5px; }
+        .price { color: #d9534f; font-weight: bold; font-size: 1.2em; }
+        .btn { background: #5cb85c; color: white; padding: 5px 10px; text-decoration: none; border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>欢迎来到我的在线商店</h1>
+        <hr>
+        <div class="product-grid">
+            {% for p in products %}
+                <div class="card">
+                    {% if p.image %}
+                        <img src="{{ p.image.url }}" alt="{{ p.name }}">
+                    {% else %}
+                        <div style="height:150px; background:#f0f0f0;">无图片</div>
+                    {% endif %}
+                    
+                    <h3>{{ p.name }}</h3>
+                    <p class="price">￥{{ p.price }}</p>
+                    <a href="{% url 'shop:product_detail' p.id %}" class="btn">查看详情</a>
+                </div>
+            {% empty %}
+                <p>目前还没有商品，请在后台添加。</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{% extends "admin/change_list.html" %}
+{% load i18n admin_urls %}
+
+{% block object-tools-items %}
+    {# 在这里插入自定义的销售报表跳转按钮 #}
+    <li>
+        <a href="sales-stats/" class="addlink" style="background-color: #f39c12; color: white; font-weight: bold; border: none; padding: 10px 15px;">
+            <span style="margin-right: 5px;">📊</span>查看销售统计报表
+        </a>
+    </li>
+    
+    {# 保留原有的“增加订单”等默认按钮 #}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    {# 如果你希望在列表上方添加额外的统计简报，可以在这里扩展 #}
+    {{ block.super }}
+{% endblock %}

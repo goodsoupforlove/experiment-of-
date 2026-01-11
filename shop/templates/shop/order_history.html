@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的订单中心 - 在线商城</title>
+    <style>
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f4f7f6; color: #333; line-height: 1.6; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h2 { border-bottom: 2px solid #eee; padding-bottom: 10px; color: #2c3e50; }
+        .nav-links { margin-bottom: 20px; }
+        .nav-links a { text-decoration: none; color: #3498db; font-size: 0.9em; }
+        
+        .order-card { border: 1px solid #e1e4e8; border-radius: 8px; padding: 20px; margin-bottom: 20px; transition: transform 0.2s; }
+        .order-card:hover { border-color: #3498db; }
+        
+        .order-header { display: flex; justify-content: space-between; border-bottom: 1px dashed #eee; padding-bottom: 10px; margin-bottom: 15px; font-size: 0.9em; color: #666; }
+        .product-info { font-size: 1.1em; font-weight: bold; margin-bottom: 15px; display: block; }
+        
+        /* 订单状态展示区域 */
+        .order-status { padding: 15px; border-radius: 6px; margin-top: 10px; }
+        .status-shipped { background-color: #e8f5e9; border: 1px solid #4caf50; }
+        .status-pending { background-color: #fffde7; border: 1px solid #fbc02d; }
+        
+        .status-title { margin: 0; font-size: 1.1em; display: flex; align-items: center; }
+        .status-desc { margin: 5px 0 0 0; font-size: 0.9em; }
+        
+        .no-orders { text-align: center; padding: 50px; color: #999; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="nav-links">
+        <a href="{% url 'shop:index' %}">← 返回商城首页</a>
+    </div>
+    
+    <h2>📦 我的订单历史</h2>
+
+    {% for order in orders %}
+    <div class="order-card">
+        <div class="order-header">
+            <span>订单编号：#{{ order.id }}</span>
+            <span>下单时间：{{ order.created_at|date:"Y-m-d H:i" }}</span>
+        </div>
+        
+        <span class="product-info">购买商品：{{ order.product.name }}</span>
+        <p>收货姓名：{{ order.customer_name }}</p>
+
+        <div class="order-status {% if order.status == '已发货' %}status-shipped{% else %}status-pending{% endif %}">
+            {% if order.status == '已发货' %}
+                <h3 class="status-title" style="color: #2e7d32;">🚚 订单状态：已发货</h3>
+                <p class="status-desc" style="color: #4caf50;">您的商品已由仓库发出，正火速赶往您的地址，请留意快递电话。</p>
+            {% else %}
+                <h3 class="status-title" style="color: #f57f17;">🕒 订单状态：待发货</h3>
+                <p class="status-desc" style="color: #856404;">商家正在准备商品，我们将尽快为您安排发货。</p>
+            {% endif %}
+        </div>
+    </div>
+    {% empty %}
+    <div class="no-orders">
+        <p>您还没有下单记录，快去商城转转吧！</p>
+    </div>
+    {% endfor %}
+</div>
+
+</body>
+</html>

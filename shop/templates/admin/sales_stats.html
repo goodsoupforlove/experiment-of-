@@ -1,0 +1,35 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+<div id="content-main">
+    <div style="background: #2c3e50; color: white; padding: 25px; border-radius: 10px; margin-bottom: 25px;">
+        <h2 style="margin:0;">📊 销售数据概览</h2>
+        <p style="font-size: 1.5em; margin-top: 10px;">平台总成交量：<strong>{{ total_orders }}</strong> 单</p>
+    </div>
+
+    <div class="module">
+        <table style="width: 100%;">
+            <caption>各商品销售详情统计</caption>
+            <thead>
+                <tr>
+                    <th>商品名称</th>
+                    <th>成交数量</th>
+                    <th>累计销售额</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in product_stats %}
+                <tr class="{% cycle 'row1' 'row2' %}">
+                    <td>{{ item.product__name }}</td>
+                    <td>{{ item.quantity }} 件</td>
+                    <td>￥{{ item.total_price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <div style="margin-top: 20px;">
+        <a href=".." class="button" style="background: #79aec8;">← 返回订单列表</a>
+    </div>
+</div>
+{% endblock %}
